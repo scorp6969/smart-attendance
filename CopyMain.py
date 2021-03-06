@@ -759,10 +759,10 @@ class MainWindow(QMainWindow):
         db_conn = pymysql.connect(host='localhost', user='root', passwd='', db='finalproject')
         cursor = db_conn.cursor()
 
-        sql1_ = f"""SELECT a.std_id, s.fullname,a.date,a.time,f.name,sem.name
+        sql1_ = f"""SELECT s.std_id,s.fullname,a.date,a.time,f.name,sem.name
                 FROM student as s
                 LEFT JOIN attendance as a
-                ON a.std_id = s.std_id
+                ON s.std_id = a.std_id
                 LEFT JOIN faculty as f
                 ON s.faculty_id = f.f_id
                 LEFT JOIN semester as sem
@@ -777,13 +777,13 @@ class MainWindow(QMainWindow):
         cursor.execute(sql2)
         sql4 = """ALTER TABLE attendance_temp RENAME TO attendance;"""
 
-        querry = """select fullname from student"""
+        # querry = """select fullname from student"""
 
-        cursor.execute(querry)
-        namelist = cursor.fetchall()
-        namelist_ = [item for x in namelist for item in x]
+        # cursor.execute(querry)
+        # namelist = cursor.fetchall()
+        # namelist_ = [item for x in namelist for item in x]
         # print(namelist_)
-        self._sql = ''
+        # self._sql = ''
         # self.ui.convert_to_csv.show()
         # self.ui.convert_to_csv_2.hide()
         if db_conn.open:
@@ -794,7 +794,7 @@ class MainWindow(QMainWindow):
 
                     sql_all_ = cursor.fetchall()
 
-                    self._sql = [list(x) for x in sql_all_]
+                    # self._sql = [list(x) for x in sql_all_]
 
                 except Exception as e:
                     self.ui.show_attend_input_field_frame_4.show()
@@ -806,6 +806,7 @@ class MainWindow(QMainWindow):
             self.ui.show_attend_input_field_frame_4.show()
             self.ui.label_4.setText(str(Exception))
 
+        self._sql = [list(x) for x in sql_all_]
         # print(self._sql)
 
         for row in self._sql:
