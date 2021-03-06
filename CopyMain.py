@@ -1346,8 +1346,8 @@ class MainWindow(QMainWindow):
     # send email function
     def sendEmailToUser(self):
         # print('clicked!')
-        email = 'scorpdipesh@gmail.com'  # Your email
-        password = '12345dp6789'  # Your email account password
+        email = 'rocker6captain9@gmail.com'  # Your email
+        password = 'eHjK&v%RnM6]A+/'  # Your email account password
         send_to_email = self.ui.email_address.text()  # Who you are sending the message to
         subject = self.ui.subject.text()  # The subject line
         message = self.ui.textEdit.toPlainText()  # The message in the email
