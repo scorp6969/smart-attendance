@@ -755,6 +755,13 @@ class MainWindow(QMainWindow):
                 ON s.semester_id = sem.sem_id
                 HAVING s.fullname = '{name}'
                 ORDER BY a.date;"""
+        sql1 = """CREATE TABLE attendance_temp LIKE attendance;"""
+        cursor.execute(sql1)
+        sql3 = """INSERT INTO attendance_temp SELECT * FROM attendance GROUP BY std_id, date;"""
+        cursor.execute(sql3)
+        sql2 = """DROP TABLE attendance;"""
+        cursor.execute(sql2)
+        sql4 = """ALTER TABLE attendance_temp RENAME TO attendance;"""
         querry = """select fullname from student"""
 
         cursor.execute(querry)
