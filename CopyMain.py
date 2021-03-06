@@ -402,36 +402,43 @@ class MainWindow(QMainWindow):
     # take photo for attendance
     def takePhotoAttendance(self):
         webcam = cv2.VideoCapture(0)
-        sampleNum = 0
+        # sampleNum = 0
         name_ = self.ui.username.text().upper()
         stdid_ = self.ui.std_roll.text()
-        if name_ != '' and stdid_ != '':
-            while webcam.isOpened():
-                _, img = webcam.read()
+        regex = '^[a-zA-Z\s]+$'
+        if name_ != '':
+            if re.search(regex, name_):
+                if stdid_ != '':
+                    while webcam.isOpened():
+                        _, img = webcam.read()
 
-                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-                text = 'W: ' + str(webcam.get(3)) + ' H: ' + str(webcam.get(4))
-                dt = datetime.datetime.now().strftime('%Y-%m-%d %I:%M %p')
-                msg1 = 'Please press \'Q/q\' to exit camera.'
-                msg2 = 'Please press \'S/s\' to save images.'
-                cv2.putText(gray, text, (10, 20), cv2.FONT_HERSHEY_SIMPLEX, .4, (0, 0, 0), 1)
-                cv2.putText(gray, dt, (10, 40), cv2.FONT_HERSHEY_SIMPLEX, .4, (0, 0, 0), 1)
-                cv2.putText(gray, msg1, (10, 60), cv2.FONT_HERSHEY_SIMPLEX, .4, (0, 0, 0), 1)
-                cv2.putText(gray, msg2, (10, 80), cv2.FONT_HERSHEY_SIMPLEX, .4, (0, 0, 0), 1)
+                        text = 'W: ' + str(webcam.get(3)) + ' H: ' + str(webcam.get(4))
+                        dt = datetime.datetime.now().strftime('%Y-%m-%d %I:%M %p')
+                        msg1 = 'Press \'Q/q\' to exit camera.'
+                        msg2 = 'Press \'S/s\' to save images.'
+                        cv2.putText(gray, text, (450, 20), cv2.FONT_HERSHEY_SIMPLEX, .6, (0, 0, 0), 1)
+                        cv2.putText(gray, dt, (10, 20), cv2.FONT_HERSHEY_SIMPLEX, .6, (0, 0, 0), 1)
+                        cv2.putText(gray, msg1, (10, 45), cv2.FONT_HERSHEY_COMPLEX, .7, (0, 0, 0), 1)
+                        cv2.putText(gray, msg2, (10, 70), cv2.FONT_HERSHEY_COMPLEX, .7, (0, 0, 0), 1)
 
-                cv2.imshow('Face', gray)
+                        cv2.imshow('Face', gray)
 
-                k = cv2.waitKey(1) & 0xFF
+                        k = cv2.waitKey(1) & 0xFF
 
-                if k == ord('q'):
-                    break
-                elif k == ord('s'):
-                    file_path_name = f'ImagesAttendance/{name_}.{stdid_}.{sampleNum}.jpg'
-                    cv2.imwrite(file_path_name, gray)
-                    sampleNum += 1
+                        if k == ord('q'):
+                            break
+                        elif k == ord('s'):
+                            file_path_name = f'ImagesAttendance/{name_}.{stdid_}.jpg'
+                            cv2.imwrite(file_path_name, gray)
+                            # sampleNum += 1
+                else:
+                    self.showRegisterMsg('Mandatory(*) field is empty!')
+            else:
+                self.showRegisterMsg('Invalid Name!')
         else:
-            self.showRegisterMsg('Username and student id is not provided.')
+            self.showRegisterMsg('Mandatory(*) field is empty!')
         webcam.release()
         cv2.destroyAllWindows()
 
