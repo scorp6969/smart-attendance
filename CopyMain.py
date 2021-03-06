@@ -375,6 +375,7 @@ class MainWindow(QMainWindow):
         sql2 = """DROP TABLE attendance;"""
         cursor.execute(sql2)
         sql4 = """ALTER TABLE attendance_temp RENAME TO attendance;"""
+        cursor.execute(sql4)
         try:
             if db_conn.open:
                 cursor.execute(sql11)
@@ -776,6 +777,7 @@ class MainWindow(QMainWindow):
         sql2 = """DROP TABLE attendance;"""
         cursor.execute(sql2)
         sql4 = """ALTER TABLE attendance_temp RENAME TO attendance;"""
+        cursor.execute(sql4)
 
         # querry = """select fullname from student"""
 
