@@ -366,13 +366,20 @@ class MainWindow(QMainWindow):
     def refreshDB(self):
         db_conn = pymysql.connect(host='localhost', user='root', passwd='', database='finalproject')
         cursor = db_conn.cursor()
-        sql1 = """SELECT COUNT(std_id) FROM student"""
-        sql2 = """SELECT COUNT(a_id) FROM attendance"""
+        sql11 = """SELECT COUNT(std_id) FROM student"""
+        sql22 = """SELECT COUNT(a_id) FROM attendance"""
+        sql1 = """CREATE TABLE attendance_temp LIKE attendance;"""
+        cursor.execute(sql1)
+        sql3 = """INSERT INTO attendance_temp SELECT * FROM attendance GROUP BY std_id, date;"""
+        cursor.execute(sql3)
+        sql2 = """DROP TABLE attendance;"""
+        cursor.execute(sql2)
+        sql4 = """ALTER TABLE attendance_temp RENAME TO attendance;"""
         try:
             if db_conn.open:
-                cursor.execute(sql1)
+                cursor.execute(sql11)
                 data = cursor.fetchone()
-                cursor.execute(sql2)
+                cursor.execute(sql22)
                 data1 = cursor.fetchone()
             else:
                 print(Exception)
