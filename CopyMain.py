@@ -392,8 +392,8 @@ class MainWindow(QMainWindow):
             y
         c = x
         c1 = y
-        print(c)
-        print(c1)
+        # print(c)
+        # print(c1)
         self.ui.label_53.setText(str(c))
         self.ui.label_56.setText(str(c1))
         db_conn.close()
@@ -769,12 +769,13 @@ class MainWindow(QMainWindow):
         sql2 = """DROP TABLE attendance;"""
         cursor.execute(sql2)
         sql4 = """ALTER TABLE attendance_temp RENAME TO attendance;"""
+
         querry = """select fullname from student"""
 
         cursor.execute(querry)
         namelist = cursor.fetchall()
         namelist_ = [item for x in namelist for item in x]
-        print(namelist_)
+        # print(namelist_)
 
         # self.ui.convert_to_csv.show()
         # self.ui.convert_to_csv_2.hide()
@@ -797,7 +798,7 @@ class MainWindow(QMainWindow):
             self.ui.label_4.setText(str(Exception))
 
         self._sql = [list(x) for x in sql_all_]
-        print(self._sql)
+        # print(self._sql)
 
         for row in self._sql:
             self.ui.tableWidget_3.insertRow(0)
@@ -808,6 +809,7 @@ class MainWindow(QMainWindow):
         for rowNr, rowValue in enumerate(self._sql):
             for itemNr, itemValue in enumerate(rowValue):
                 self.ui.tableWidget_3.setItem(rowNr, itemNr, QtWidgets.QTableWidgetItem(str(self._sql[rowNr][itemNr])))
+        print('Success')
         db_conn.close()
 
     # ###############################################
@@ -850,7 +852,7 @@ class MainWindow(QMainWindow):
             print(err)
 
         self._sql = [list(x) for x in sql_all]
-        print(self._sql)
+        # print(self._sql)
 
         for row in self._sql:
             self.ui.tableWidget.insertRow(0)
@@ -861,6 +863,7 @@ class MainWindow(QMainWindow):
         for rowNr, rowValue in enumerate(self._sql):
             for itemNr, itemValue in enumerate(rowValue):
                 self.ui.tableWidget.setItem(rowNr, itemNr, QtWidgets.QTableWidgetItem(str(self._sql[rowNr][itemNr])))
+        print('Success')
         db_conn.close()
 
     # ###############################################
@@ -905,7 +908,7 @@ class MainWindow(QMainWindow):
             print(err)
 
         self._sql = [list(x) for x in sql_all]
-        print(self._sql)
+        # print(self._sql)
 
         for row in self._sql:
             self.ui.tableWidget.insertRow(0)
@@ -916,6 +919,7 @@ class MainWindow(QMainWindow):
         for rowNr, rowValue in enumerate(self._sql):
             for itemNr, itemValue in enumerate(rowValue):
                 self.ui.tableWidget.setItem(rowNr, itemNr, QtWidgets.QTableWidgetItem(str(self._sql[rowNr][itemNr])))
+        print('Success')
         db_conn.close()
 
     # ###############################################
@@ -1086,8 +1090,8 @@ class MainWindow(QMainWindow):
         for l1 in std_id_count:
             name.append(l1[0])
             days.append(l1[1])
-        print(name)
-        print(days)
+        # print(name)
+        # print(days)
 
         ypos = np.arange(len(name))
         # print(ypos)
@@ -1101,6 +1105,7 @@ class MainWindow(QMainWindow):
 
         plt.legend()
         plt.show()
+        print('Success')
         db.close()
 
     def chartStudentLine(self):
@@ -1127,8 +1132,8 @@ class MainWindow(QMainWindow):
         for l1 in std_id_count:
             ids.append(l1[0])
             days.append(l1[1])
-        print(ids)
-        print(days)
+        # print(ids)
+        # print(days)
 
         # ypos = np.arange(len(ids))
         # print(ypos)
@@ -1140,6 +1145,7 @@ class MainWindow(QMainWindow):
 
         # plt.legend()
         plt.show()
+        print('Success')
         db.close()
 
     def chartFacultyBar(self):
@@ -1170,8 +1176,8 @@ class MainWindow(QMainWindow):
         for l1 in std_id_count:
             fname.append(l1[0])
             ta.append(l1[1])
-        print(fname)
-        print(ta)
+        # print(fname)
+        # print(ta)
 
         # ypos = np.arange(len(fname))
         # print(ypos)
@@ -1185,6 +1191,7 @@ class MainWindow(QMainWindow):
 
         plt.legend()
         plt.show()
+        print('Success')
         db.close()
 
     def chartFacultyLine(self):
@@ -1215,8 +1222,8 @@ class MainWindow(QMainWindow):
         for l1 in std_id_count:
             fname.append(l1[0])
             ta.append(l1[1])
-        print(fname)
-        print(ta)
+        # print(fname)
+        # print(ta)
 
         # ypos = np.arange(len(ids))
         # print(ypos)
@@ -1228,6 +1235,7 @@ class MainWindow(QMainWindow):
 
         # plt.legend()
         plt.show()
+        print('Success')
         db.close()
 
     def chartSemesterBar(self):
@@ -1258,8 +1266,8 @@ class MainWindow(QMainWindow):
         for l1 in std_id_count:
             fname.append(l1[0] + '-' + l1[1])
             ta.append(l1[2])
-        print(fname)
-        print(ta)
+        # print(fname)
+        # print(ta)
 
         # ypos = np.arange(len(fname))
         # print(ypos)
@@ -1273,6 +1281,7 @@ class MainWindow(QMainWindow):
 
         plt.legend()
         plt.show()
+        print('Success')
         db.close()
 
     def chartSemesterLine(self):
@@ -1303,8 +1312,8 @@ class MainWindow(QMainWindow):
         for l1 in std_id_count:
             fname.append(l1[0] + '-' + l1[1])
             ta.append(l1[2])
-        print(fname)
-        print(ta)
+        # print(fname)
+        # print(ta)
 
         # ypos = np.arange(len(fname))
         # print(ypos)
@@ -1318,6 +1327,7 @@ class MainWindow(QMainWindow):
 
         # plt.legend()
         plt.show()
+        print('Success')
         db.close()
 
     # ###############################################
@@ -1393,6 +1403,7 @@ class MainWindow(QMainWindow):
         text = msg.as_string()  # You now need to convert the MIMEMultipart object to a string to send
         server.sendmail(email, send_to_email, text)  # Send the email
         self.showEmailResponse('Message Sent')
+        print('Success')
         server.quit()  # Logout of the email server
 
     def showEmailResponse(self, msg):
