@@ -26,3 +26,7 @@ After creating virtual environment
 pip install -r requirements.txt
 
 Run splash_main.py
+
+login details:
+username: dipesh
+password: dipesh123
