@@ -776,7 +776,7 @@ class MainWindow(QMainWindow):
         namelist = cursor.fetchall()
         namelist_ = [item for x in namelist for item in x]
         # print(namelist_)
-
+        self._sql = ''
         # self.ui.convert_to_csv.show()
         # self.ui.convert_to_csv_2.hide()
         if db_conn.open:
@@ -786,6 +786,8 @@ class MainWindow(QMainWindow):
                     cursor.execute(sql1_)
 
                     sql_all_ = cursor.fetchall()
+
+                    self._sql = [list(x) for x in sql_all_]
 
                 except Exception as e:
                     self.ui.show_attend_input_field_frame_4.show()
@@ -797,7 +799,6 @@ class MainWindow(QMainWindow):
             self.ui.show_attend_input_field_frame_4.show()
             self.ui.label_4.setText(str(Exception))
 
-        self._sql = [list(x) for x in sql_all_]
         # print(self._sql)
 
         for row in self._sql:
